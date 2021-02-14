@@ -76,4 +76,11 @@ public class PersonServiceTest {
         verify(personRepository,times(1)).findAll();
         assertEquals(result.size(), 2);
     }
+
+    @Test
+    public void testDeletePerson(){
+        when(this.personRepository.existsById(any(Integer.class))).thenReturn(true);
+        personService.deletePerson(1); 
+        verify(personRepository,times(1)).deleteById(1);
+    }
 }

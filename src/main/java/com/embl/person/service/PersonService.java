@@ -14,28 +14,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonService {
 
-    ModelMapper modelMapper = new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
 
-    @Autowired
-    PersonRepository personRepository;
+        @Autowired
+        PersonRepository personRepository;
 
-	public PersonDTO createOrUpdatePerson(PersonDTO personDTO) {
+        public PersonDTO createOrUpdatePerson(PersonDTO personDTO) {
 
-        Person entity = modelMapper.map(personDTO, Person.class);
-        Person saved = personRepository.save(entity);
-        return modelMapper.map(saved,PersonDTO.class);
-	}
+                Person entity = modelMapper.map(personDTO, Person.class);
+                Person saved = personRepository.save(entity);
+                return modelMapper.map(saved, PersonDTO.class);
+        }
 
-	public PersonDTO getPerson(int id) {
-		Person saved = personRepository.findById(id).get();
-        return modelMapper.map(saved,PersonDTO.class);
-	}
+        public PersonDTO getPerson(int id) {
+                Person saved = personRepository.findById(id).get();
+                return modelMapper.map(saved, PersonDTO.class);
+        }
 
-	public List<PersonDTO> getAllPersons() {
-        List<Person> persons = personRepository.findAll();
-        return persons.stream().map(person -> {
-           return  modelMapper.map(person,PersonDTO.class);
-        }).collect(Collectors.toList());		
-	}
-    
+        public List<PersonDTO> getAllPersons() {
+                List<Person> persons = personRepository.findAll();
+                return persons.stream().map(person -> {
+                        return modelMapper.map(person, PersonDTO.class);
+                }).collect(Collectors.toList());
+        }
+
+        public void deletePerson(int id){
+                boolean exist = personRepository.existsById(id);
+                if (exist){
+                        personRepository.deleteById(id);
+                }
+        }
 }
