@@ -74,7 +74,7 @@ public class PersonServiceTest {
         when(this.personRepository.findAll()).thenReturn(persons);
         List<PersonDTO> result = personService.getAllPersons();
         verify(personRepository,times(1)).findAll();
-        assertEquals(result.size(), 2);
+        assertEquals(result.size(), 1);
     }
 
     @Test

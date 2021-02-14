@@ -2,6 +2,7 @@ package com.embl.person.controller;
 
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -127,7 +128,7 @@ public class PersonControllerTest {
     @Test
     public void testPersonDelete(){
         
-        doNothing().when(this.personService.deletePerson(any(Integer.class)));
+        doNothing().when(this.personService).deletePerson(anyInt());
         
         try {
             this.mockMVC
